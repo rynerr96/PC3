@@ -8,6 +8,8 @@ contract MyTokenMiPrimerToken is ERC20Upgradeable, UUPSUpgradeable {
     address private owner;
     address private gnosisSafe;
 
+    event TokensMinted(address indexed to, uint256 amount);
+
     function initialize() initializer public {
         __ERC20_init("MiPrimerToken", "MPT");
         owner = msg.sender;
@@ -20,6 +22,7 @@ contract MyTokenMiPrimerToken is ERC20Upgradeable, UUPSUpgradeable {
 
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
+        emit TokensMinted(to, amount);
     }
 
     function setGnosisSafeAddress(address gnosisSafeAddress) external onlyOwner {

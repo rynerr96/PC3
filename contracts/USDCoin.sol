@@ -14,6 +14,11 @@ contract USDCoin is ERC20, AccessControl {
         _setupRole(MINTER_ROLE, msg.sender);
     }
 
+        modifier onlyMinter() {
+        require(hasRole(MINTER_ROLE, msg.sender), "USDCoin: Caller is not a minter");
+        _;
+    }
+
     function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
         _mint(to, amount);
     }
