@@ -97,6 +97,12 @@ async function deployUSDCoin() {
 
   console.log("Tokens minteados:", amountToMint.toString());
   console.log("Tokens enviados a la dirección:", recipientAddress);
+
+  // Verificar el contrato en GoerliScan
+  await verify(usdCoin.address, "USDCoin");
+
+  // Imprimir las direcciones del contrato y de la implementación
+  await printAddress("USDCoin", usdCoin.address);
 }
 
 /**deployGoerli().catch((error) => {
